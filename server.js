@@ -1,20 +1,12 @@
 require("dotenv").config()
 const express = require("express")
 const app = express()
-const auth_route = require("./routes/auth")
-const connectDb = require("./config/db")
+const connectDB = require("./config/db")
+connectDB()
+app.use("/api/auth", require("./routes/userAuth"))
 
-
-app.use(express.json())
-
-connectDb()
-
-app.use('/api/auth', auth_route)
-
-
-
-
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 4000
 app.listen(PORT, () => {
-    console.log(`Server Runnign on ${PORT}`);
+    console.log(`Server Running On ${PORT}`);
+
 })
